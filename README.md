@@ -5,6 +5,7 @@ VRoidモデル専用きせかえ機能
 ## 使い方
 ＊注意
 UniVRMが必要です　https://github.com/vrm-c/UniVRM
+
 ###　モデル側
 1.着せ替えたいVRoidStudio製のVRMモデルにColliderとRigidbodyをつける
 2.その後BackClothesをアタッチ
