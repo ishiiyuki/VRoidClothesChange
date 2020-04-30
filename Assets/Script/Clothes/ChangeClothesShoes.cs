@@ -103,11 +103,8 @@ public class ChangeClothesShoes : MonoBehaviour
 
 	void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.layer == 11)
-		{
-			isBodyHit = false;
-			Body = null;
-		}
+		isBodyHit = false;
+		Body = null;
 	}
 
 
