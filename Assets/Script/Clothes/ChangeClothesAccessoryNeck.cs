@@ -65,6 +65,14 @@ public class ChangeClothesAccessoryNeck : MonoBehaviour
 
 	}
 
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Z))
+		{
+			ChangeCloth();
+		}
+	}
+
 
 	//ヒット判定
 	void OnTriggerStay(Collider other)
@@ -74,14 +82,22 @@ public class ChangeClothesAccessoryNeck : MonoBehaviour
 		{
 			return;
 		}
-		if(other.gameObject.layer == 11)
+		//レイヤーでフィルタかけたほうが安全です
 		{
 			isBodyHit = true;
-
-			var backClothes = GameObject.Find("ChangeClothes").GetComponent<BackClothes>();
-			Body = backClothes.Body;
-			isVRoid = backClothes.IsVRoid;
-			bodyAcceeoryType = backClothes.IsAccessoryNeck;
+			var Player = other.gameObject;
+			if(Player != null)
+			{
+				if(Player.GetComponent<BackClothes>())
+				{
+					var backClothes = Player.GetComponent<BackClothes>();
+					Body = backClothes.Body;
+					isVRoid = backClothes.IsVRoid;
+					bodyAcceeoryType = backClothes.IsAccessoryNeck;
+				}
+				
+			}
+			
 
 
 
@@ -126,18 +142,16 @@ public class ChangeClothesAccessoryNeck : MonoBehaviour
 		Material[] sharedMaterials = body.GetSharedMaterials();
 		foreach (Material material in sharedMaterials)
 		{
-			Debug.Log(material.name);
 			if (material.name.IndexOf("AccessoryNeckk", StringComparison.Ordinal) >= 0)
 			{
 				if (material.name.IndexOf("_001", StringComparison.Ordinal) >= 0 &&
 					(bodyAcceeoryType == AccessoryNeck.Tie))
 				{
-					//ローファー
+					
 					material.mainTexture = clothesNeckAcse;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesNeckAcse);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesNeckAcse);
+					
 				}
 
 
@@ -147,12 +161,11 @@ public class ChangeClothesAccessoryNeck : MonoBehaviour
 				if (material.name.IndexOf("_001", StringComparison.Ordinal) >= 0 &&
 					(bodyAcceeoryType == AccessoryNeck.Ribbon))
 				{
-					//ローファー
+					
 					material.mainTexture = clothesNeckAcse;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesNeckAcse);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesNeckAcse);
+					
 				}
 
 			}

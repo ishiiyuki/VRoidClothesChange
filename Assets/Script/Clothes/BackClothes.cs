@@ -73,19 +73,32 @@ public class BackClothes : MonoBehaviour
 
 	void Start()
     {
-		/*
-		//上半身
-		this.UpdateAsObservable()
-			.Where(_ => Input.GetKey(KeyCode.X))
-			.ThrottleFirst(TimeSpan.FromSeconds(2))
-			.Subscribe(_ => ReClothes());
-		//下半身
-		this.UpdateAsObservable()
-			.Where(_ => Input.GetKey(KeyCode.C))
-			.ThrottleFirst(TimeSpan.FromSeconds(2))
-			.Subscribe(_ => ReClothesBottom());
-		*/
+
+		//Body持ってるか？
+		Transform body = this.transform.Find("Body")?.transform;
+		if (body != null)
+		{
+			Body = body;
+			Init();
+		}
+
 	}
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.X))
+		{
+			ReClothes();
+		}
+		else if (Input.GetKeyDown(KeyCode.C))
+		{
+			ReClothesBottom();
+		}
+		else if (Input.GetKeyDown(KeyCode.V))
+		{
+			ReClothesShoes();
+		}
+	}
+
 
 	public void Init()
 	{
@@ -416,17 +429,16 @@ public class BackClothes : MonoBehaviour
 		Material[] sharedMaterials = body.GetSharedMaterials();
 		foreach (Material material in sharedMaterials)
 		{
-			Debug.Log(material.name);
+			
 			if (material.name.IndexOf("_CLOTH", StringComparison.Ordinal) >= 0)
 			{
 				if (material.name.IndexOf("_Onepice", StringComparison.Ordinal) >= 0)
 				{
-					Debug.Log("マテリアルの名前:" + material.shader.name);
+					
 					material.mainTexture = clothesTex;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesTex);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesTex);
+					
 				}
 				
 			}
@@ -438,17 +450,16 @@ public class BackClothes : MonoBehaviour
 		Material[] sharedMaterials = body.GetSharedMaterials();
 		foreach (Material material in sharedMaterials)
 		{
-			Debug.Log(material.name);
+			
 			if (material.name.IndexOf("_CLOTH", StringComparison.Ordinal) >= 0)
 			{
 				if (material.name.IndexOf("_Tops", StringComparison.Ordinal) >= 0)
 				{
-					Debug.Log("マテリアルの名前:" + material.shader.name);
+					
 					material.mainTexture = clothesTex;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesTex);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesTex);
+					
 				}
 
 			}
@@ -461,7 +472,7 @@ public class BackClothes : MonoBehaviour
 		Material[] sharedMaterials = body.GetSharedMaterials();
 		foreach (Material material in sharedMaterials)
 		{
-			Debug.Log(material.name);
+			
 			if (material.name.IndexOf("_CLOTH", StringComparison.Ordinal) >= 0)
 			{
 				if (material.name.IndexOf("_Shoes", StringComparison.Ordinal) >= 0)
@@ -470,13 +481,32 @@ public class BackClothes : MonoBehaviour
 				}
 				if (material.name.IndexOf("_Bottoms", StringComparison.Ordinal) >= 0)
 				{
-					Debug.Log("マテリアルの名前:" + material.shader.name);
+					
 					material.mainTexture = bottomsTex;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesTex);
-					}
+					
+					material.SetTexture("_ShadeTexture", bottomsTex);
+					
 				}
+			}
+		}
+	}
+
+	void ReClothesShoes()
+	{
+
+		Material[] sharedMaterials = body.GetSharedMaterials();
+		foreach (Material material in sharedMaterials)
+		{
+			
+			if (material.name.IndexOf("_CLOTH", StringComparison.Ordinal) >= 0)
+			{
+				if (material.name.IndexOf("_Shoes", StringComparison.Ordinal) >= 0)
+				{
+					material.mainTexture = shoesTex;
+
+					material.SetTexture("_ShadeTexture", shoesTex);
+				}
+				
 			}
 		}
 	}

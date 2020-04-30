@@ -63,19 +63,20 @@ public class ChangeClothesTop : MonoBehaviour
     {
 
 		material = this.GetComponent<Renderer>().material;
-		/*
-		this.UpdateAsObservable()
-			.Where(_ => Input.GetKey(KeyCode.Z))
-			.Where(_ => isBodyHit)
-			.ThrottleFirst(TimeSpan.FromSeconds(2))
-			.Subscribe(_ => ChangeCloth());
-			*/
 
 		//自分のテクスチャをメタデータから引っ張ってくる
 
 		material.SetTexture("_MainTex", clothesTexture);
 	}
 
+
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Z))
+		{
+			ChangeCloth();
+		}
+	}
 
 	//ヒット判定
 	void OnTriggerStay(Collider other)
@@ -85,16 +86,22 @@ public class ChangeClothesTop : MonoBehaviour
 		{
 			return;
 		}
-		if(other.gameObject.layer == 11)
+		//レイヤーでフィルタかけたほうが安全です
 		{
 			isBodyHit = true;
 
-			var backClothes = GameObject.Find("ChangeClothes").GetComponent<BackClothes>();
-			Body = backClothes.Body;
-			isVRoid = backClothes.IsVRoid;
-			bodyClothesType = backClothes.IsClothesTyep;
+			var Player = other.gameObject;
+			if (Player != null)
+			{
+				if (Player.GetComponent<BackClothes>())
+				{
+					var backClothes = Player.GetComponent<BackClothes>();
+					Body = backClothes.Body;
+					isVRoid = backClothes.IsVRoid;
+					bodyClothesType = backClothes.IsClothesTyep;
+				}
 
-
+			}
 
 		}
 	}
@@ -107,9 +114,6 @@ public class ChangeClothesTop : MonoBehaviour
 			Body = null;
 		}
 	}
-
-
-
 
 
 	public void ChangeCloth()
@@ -139,7 +143,7 @@ public class ChangeClothesTop : MonoBehaviour
 		Material[] sharedMaterials = body.GetSharedMaterials();
 		foreach (Material material in sharedMaterials)
 		{
-			Debug.Log(material.name);
+			
 			if (material.name.IndexOf("_CLOTH", StringComparison.Ordinal) >= 0)
 			{
 				if(myClothesTyep == ClothesTyep.Onepice
@@ -153,10 +157,10 @@ public class ChangeClothesTop : MonoBehaviour
 						//ワンピース型
 						
 						material.mainTexture = clothesTexture;
-						if (material.shader.name.Contains("VRM/MToon"))
-						{
-							material.SetTexture("_ShadeTexture", clothesTexture);
-						}
+	
+						
+						material.SetTexture("_ShadeTexture", clothesTexture);
+						
 
 					}
 					
@@ -168,10 +172,10 @@ public class ChangeClothesTop : MonoBehaviour
 					{
 						//制服
 						material.mainTexture = clothesTexture;
-						if (material.shader.name.Contains("VRM/MToon"))
-						{
-							material.SetTexture("_ShadeTexture", clothesTexture);
-						}
+					
+						
+						material.SetTexture("_ShadeTexture", clothesTexture);
+						
 					}
 		
 
@@ -181,50 +185,44 @@ public class ChangeClothesTop : MonoBehaviour
 
 						//制服ズボン系
 						material.mainTexture = clothesTexture;
-						if (material.shader.name.Contains("VRM/MToon"))
-						{
-							material.SetTexture("_ShadeTexture", clothesTexture);
-						}
+						
+						material.SetTexture("_ShadeTexture", clothesTexture);
+						
 					}
 					else if (material.name.IndexOf("_004", StringComparison.Ordinal) >= 0 && myClothesTyep == ClothesTyep.MiniTshirt)
 					{
 						//ミニTシャツ
 						material.mainTexture = clothesTexture;
-						if (material.shader.name.Contains("VRM/MToon"))
-						{
-							material.SetTexture("_ShadeTexture", clothesTexture);
-						}
+						
+						material.SetTexture("_ShadeTexture", clothesTexture);
+						
 					}
 					
 					else if (material.name.IndexOf("_005", StringComparison.Ordinal) >= 0 && myClothesTyep == ClothesTyep.Tshirt)
 					{
 						//Tshirt
 						material.mainTexture = clothesTexture;
-						if (material.shader.name.Contains("VRM/MToon"))
-						{
-							material.SetTexture("_ShadeTexture", clothesTexture);
-						}
+						
+						material.SetTexture("_ShadeTexture", clothesTexture);
+						
 					}
 					else if (material.name.IndexOf("_006", StringComparison.Ordinal) >= 0 && myClothesTyep == ClothesTyep.Parker)
 					{
 						//パーカー
 						
 						material.mainTexture = clothesTexture;
-						if (material.shader.name.Contains("VRM/MToon"))
-						{
-							material.SetTexture("_ShadeTexture", clothesTexture);
-						}
+						
+						material.SetTexture("_ShadeTexture", clothesTexture);
+						
 					}
 					else if (material.name.IndexOf("_008", StringComparison.Ordinal) >= 0 &&
 						(myClothesTyep == ClothesTyep.Longcoat || myClothesTyep == ClothesTyep.LongcoatShirt || myClothesTyep == ClothesTyep.LongcoatHi))
 					{
 						//ロングコート
-						
 						material.mainTexture = clothesTexture;
-						if (material.shader.name.Contains("VRM/MToon"))
-						{
-							material.SetTexture("_ShadeTexture", clothesTexture);
-						}
+						
+						material.SetTexture("_ShadeTexture", clothesTexture);
+					
 					}
 				}
 				

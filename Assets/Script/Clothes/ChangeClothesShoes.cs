@@ -59,19 +59,17 @@ public class ChangeClothesShoes : MonoBehaviour
     {
 
 		material = this.GetComponent<Renderer>().material;
-		/*
-		this.UpdateAsObservable()
-			.Where(_ => Input.GetKey(KeyCode.Z))
-			.Where(_ => isBodyHit)
-			.ThrottleFirst(TimeSpan.FromSeconds(2))
-			.Subscribe(_ => ChangeCloth());
-			*/
-
 		material.SetTexture("_MainTex", clothesShoes);
 
 
 	}
-
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Z))
+		{
+			ChangeCloth();
+		}
+	}
 
 	//ヒット判定
 	void OnTriggerStay(Collider other)
@@ -81,14 +79,22 @@ public class ChangeClothesShoes : MonoBehaviour
 		{
 			return;
 		}
-		if(other.gameObject.layer == 11)
+		//レイヤーでフィルタかけたほうが安全です
 		{
 			isBodyHit = true;
 
-			var backClothes = GameObject.Find("ChangeClothes").GetComponent<BackClothes>();
-			Body = backClothes.Body;
-			isVRoid = backClothes.IsVRoid;
-			bodyShoesType = backClothes.IsShoesType;
+			var Player = other.gameObject;
+			if (Player != null)
+			{
+				if (Player.GetComponent<BackClothes>())
+				{
+					var backClothes = Player.GetComponent<BackClothes>();
+					Body = backClothes.Body;
+					isVRoid = backClothes.IsVRoid;
+					bodyShoesType = backClothes.IsShoesType;
+				}
+
+			}
 
 
 
@@ -134,7 +140,7 @@ public class ChangeClothesShoes : MonoBehaviour
 		Material[] sharedMaterials = body.GetSharedMaterials();
 		foreach (Material material in sharedMaterials)
 		{
-			Debug.Log(material.name);
+			
 			if (material.name.IndexOf("_Shoes", StringComparison.Ordinal) >= 0)
 			{
 				if (material.name.IndexOf("_001", StringComparison.Ordinal) >= 0 &&
@@ -142,10 +148,9 @@ public class ChangeClothesShoes : MonoBehaviour
 				{
 					//ローファー
 					material.mainTexture = clothesShoes;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesShoes);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesShoes);
+					
 				}
 				else if (material.name.IndexOf("_002", StringComparison.Ordinal) >= 0 &&
 					(bodyShoesType == ShoesType.Onepice))
@@ -153,20 +158,18 @@ public class ChangeClothesShoes : MonoBehaviour
 
 					//ワンピース
 					material.mainTexture = clothesShoes;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesShoes);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesShoes);
+					
 				}
 				else if (material.name.IndexOf("_003", StringComparison.Ordinal) >= 0 &&
 					(bodyShoesType == ShoesType.LoafersPants))
 				{
 					//ローファーズボン系
 					material.mainTexture = clothesShoes;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesShoes);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesShoes);
+					
 				}
 
 				else if (material.name.IndexOf("_004", StringComparison.Ordinal) >= 0 &&
@@ -174,40 +177,36 @@ public class ChangeClothesShoes : MonoBehaviour
 				{
 					//パンプス
 					material.mainTexture = clothesShoes;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesShoes);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesShoes);
+					
 				}
 				else if (material.name.IndexOf("_005", StringComparison.Ordinal) >= 0 &&
 					(bodyShoesType == ShoesType.Sneakers))
 				{
 					//スニーカー
 					material.mainTexture = clothesShoes;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesShoes);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesShoes);
+					
 				}
 				else if (material.name.IndexOf("_006", StringComparison.Ordinal) >= 0 &&
 					(bodyShoesType == ShoesType.B_Shoes))
 				{
 					//バッシュ
 					material.mainTexture = clothesShoes;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesShoes);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesShoes);
+					
 				}
 				else if (material.name.IndexOf("_007", StringComparison.Ordinal) >= 0 &&
 					(bodyShoesType == ShoesType.Hi_Cut))
 				{
 					//ハイカット
 					material.mainTexture = clothesShoes;
-					if (material.shader.name.Contains("VRM/MToon"))
-					{
-						material.SetTexture("_ShadeTexture", clothesShoes);
-					}
+					
+					material.SetTexture("_ShadeTexture", clothesShoes);
+					
 				}
 
 
