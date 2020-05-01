@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UniGLTF;
 using UnityEngine;
 
@@ -109,6 +110,13 @@ public class BackClothes : MonoBehaviour
 		//今のテクスチャを保持しながらタイプチェック
 
 		Material[] sharedMaterials = body.GetSharedMaterials();
+
+		//Material数で対応可能であるかチェックする
+		if(sharedMaterials.Length < 15)
+		{
+			//Materialが圧縮されてるのでむりぽ
+			return;
+		}
 
 		foreach (Material material in sharedMaterials)
 		{
