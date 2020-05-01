@@ -33,3 +33,8 @@ Editor上で動作確認中にもとのテクスチャに戻さずに終了す�
 
 ## ライセンス
 MIT license
+
+
+なにかツッコミなどあったら気軽にプルリク投げてください
+
+https://twitter.com/mizuki_izuna
