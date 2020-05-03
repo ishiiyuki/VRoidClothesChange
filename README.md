@@ -5,6 +5,7 @@ VRoidモデル専用きせかえ機能
 ## 使い方
 ＊注意
 UniVRMが必要です　https://github.com/vrm-c/UniVRM
+
 VRoidStudio0.9.0からのMaterial圧縮機能を使ったVRMには対応してません
 
 ・モデル側
