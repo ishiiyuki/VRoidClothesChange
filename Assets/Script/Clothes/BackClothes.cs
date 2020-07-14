@@ -111,12 +111,6 @@ public class BackClothes : MonoBehaviour
 
 		Material[] sharedMaterials = body.GetSharedMaterials();
 
-		//Material数で対応可能であるかチェックする
-		if(sharedMaterials.Length < 15)
-		{
-			//Materialが圧縮されてるのでむりぽ
-			return;
-		}
 
 		foreach (Material material in sharedMaterials)
 		{
