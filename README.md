@@ -1,25 +1,21 @@
-# VRoidClothesChange
+# VRoidClothesChangeBody
 VRoidモデル専用きせかえ機能
-仮想商店街Conataで試験導入してる機能の簡易版です
+がマテリアル圧縮機能で使えなくなってしまったので首から下挿げ替え機能です。
 
 ## 使い方
 ＊注意
 UniVRMが必要です　https://github.com/vrm-c/UniVRM
 
 ・モデル側
-1.着せ替えたいVRoidStudio製のVRMモデルにColliderとRigidbodyをつける
+1.ChangeBaseBody.csつける
 
-2.その後BackClothesをアタッチ
+2.
 
-・着せ替え判定を取るオブジェクト
 
-1.VRoidStudioで使えるメッシュの上下と靴、アクセサリ毎にスクリプトがあるので対象となるスクリプトをQuadなどににアタッチ
+・マネキン側
+1.ChangeBaseBody.csつける
 
-2.スクリプトをつけたQuadなどにColliderを追加してisTriggerをONにする
-
-（上：ChangeClothesTop　下：ChangeClothesBottom　靴：ChangeClothesShoes）
-
-3.着せ替えさせたいテクスチャを紐付けてからそのテクスチャがどの服のメッシュに対応しているのかを設定する
+2.空のゲームオブジェクトを作り「VRMSizeFixer」を付けて身長補正誤差を設定します。そのあと対象のマネキン用のVRoidモデルを設定してください。
 
 
 ・動作確認
